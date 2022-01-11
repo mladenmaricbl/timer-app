@@ -8,6 +8,7 @@ class ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TimerBloc, TimerState>(
+      buildWhen: (prev, state) => prev.runtimeType != state.runtimeType,
       builder: (context, state) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -23,13 +24,13 @@ class ActionButtons extends StatelessWidget {
             if(state is TimerRunInProgress) ...[
               FloatingActionButton(
                 onPressed: () {
-                  context.read<TimerBloc>().add(TimerPaused());
+                  context.read<TimerBloc>().add(const TimerPaused());
                 },
                 child: const Icon(Icons.pause),
               ),
               FloatingActionButton(
                 onPressed: () {
-                  context.read<TimerBloc>().add(TimerReseted());
+                  context.read<TimerBloc>().add(const TimerReseted());
                 },
                 child: const Icon(Icons.replay),
               ),
@@ -37,13 +38,13 @@ class ActionButtons extends StatelessWidget {
             if(state is TimerRunPause) ...[
               FloatingActionButton(
                 onPressed: () {
-                  context.read<TimerBloc>().add(TimerResumed());
+                  context.read<TimerBloc>().add(const TimerResumed());
                 },
                 child: const Icon(Icons.play_arrow),
               ),
               FloatingActionButton(
                 onPressed: () {
-                  context.read<TimerBloc>().add(TimerReseted());
+                  context.read<TimerBloc>().add(const TimerReseted());
                 },
                 child: const Icon(Icons.replay),
               ),
