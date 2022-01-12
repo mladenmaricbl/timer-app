@@ -13,7 +13,7 @@ class ActionButtons extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            if(state is TimerInitial) ...[
+            if(state is TimerInitial || state is TimerComplete) ...[
               FloatingActionButton(
                 onPressed: () {
                   context.read<TimerBloc>().add(TimerStarted(duration: state.duration));
